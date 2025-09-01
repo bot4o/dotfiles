@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cp -r ~/Themes/Carbon/. ~/ &&
+wal -i ~/Wallpaper/a_road_going_through_a_desert.jpeg && wal --theme ~/.cache/wal/e-ink.json
+#~/.spicetify/spicetify apply &&
+
+cat > ~/.config/gtk-3.0/settings.ini <<EOF
+[Settings]
+gtk-theme-name=Adwaita-dark
+gtk-icon-theme-name=Papirus
+gtk-font-name=JetBrains Mono 10
+EOF
+
+#pkill flameshot && flameshot &
+pkill dunst && dunst &
+qtile cmd-obj -o cmd -f restart

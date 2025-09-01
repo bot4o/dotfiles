@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cp -r ~/Themes/Sakura/. ~/ &&
+wal -b 282738 -i ~/Wallpaper/120_-_KnFPX73.jpg &&
+
+
+cat > ~/.config/gtk-3.0/settings.ini <<EOF
+[Settings]
+gtk-theme-name=Sakura_clean
+gtk-icon-theme-name=Sakura_icons
+gtk-font-name=JetBrains Mono 10
+EOF
+
+#~/.spicetify/spicetify apply &&
+#pkill flameshot && flameshot &
+pkill dunst && dunst
+qtile cmd-obj -o cmd -f restart
