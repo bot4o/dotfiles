@@ -6,4 +6,13 @@ wal -i ~/Wallpaper/claudio-testa-FrlCwXwbwkk-unsplash.jpg &&
 # Start picom
 picom --config ~/.config/picom/picom.conf &
 
+dunst &&
+
+flameshot &&
+
+spotify-launcher & easyeffects &&
+
+discord &&
+
+steam &
 

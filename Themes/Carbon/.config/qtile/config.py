@@ -79,6 +79,9 @@ keys = [
     Key(["mod1"], "Tab", lazy.group.next_window(), desc="Cycle to next window"),
     Key(["mod1", "shift"], "Tab", lazy.group.prev_window(), desc="Cycle to previous window"),
 
+    Key([mod], "d", lazy.spawn("audio-device-switch.sh"), desc='Audio device switcher'),
+
+
 ]
 
 
@@ -211,7 +214,8 @@ screens = [
 
                 widget.Image(filename='~/.config/qtile/Assets/1.png'),
 
-                widget.CurrentLayoutIcon(
+                widget.CurrentLayout(
+                    mode="icon",
                     custom_icon_paths=["~/.config/qtile/Assets/layout"],
                     background='#CCCCCC',
                     scale=0.50,
@@ -257,7 +261,33 @@ screens = [
                 widget.Image(filename='~/.config/qtile/Assets/6.png', background='#CCCCCC'),
 
                 widget.TextBox(
-                    text="",
+                    text="",  
+                    font="Font Awesome 6 Free Solid",
+                    fontsize=13,
+                    background='#CCCCCC',
+                    foreground='#474747',
+                ),
+
+                widget.CPU(
+                    background='#CCCCCC',
+                    format='{load_percent}%',  
+                    foreground='#474747',
+                    font="JetBrainsMono Nerd Font Bold",
+                    fontsize=13,
+                    update_interval=5,
+                ),
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/2.png',
+                ),
+
+                widget.Spacer(
+                    length=8,
+                    background='#CCCCCC',
+                ),
+
+                widget.TextBox(
+                    text=" ",
                     font="Font Awesome 6 Free Solid",
                     fontsize=13,
                     background='#CCCCCC',
@@ -273,25 +303,53 @@ screens = [
                     update_interval=5,
                 ),
 
-                widget.Image(filename='~/.config/qtile/Assets/2.png'),
+                widget.Image(
+                    filename='~/.config/qtile/Assets/2.png',
+                ),
 
-                widget.Spacer(length=8, background='#CCCCCC'),
+                widget.Spacer(
+                    length=8,
+                    background='#CCCCCC',
+                ),
 
                 widget.TextBox(
-                    text=" ",
+                    text=" ",  
                     font="Font Awesome 6 Free Solid",
                     fontsize=13,
                     background='#CCCCCC',
                     foreground='#474747',
                 ),
 
-                widget.Battery(
+                widget.GenPollText(
+                    background='#CCCCCC',
+                    update_interval=60,
+                    func=lambda: subprocess.check_output(
+                        "df -h / | awk 'NR==2 {print $3\"/\"$2}'", shell=True
+                    ).decode("utf-8").strip(),
+                    foreground='#474747',
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=13,
-                    background='#CCCCCC',
-                    foreground='#474747',
-                    format='{percent:2.0%}',
                 ),
+
+                # widget.Image(filename='~/.config/qtile/Assets/2.png'),
+
+                # widget.Spacer(length=8, background='#CCCCCC'),
+
+                # widget.TextBox(
+                #     text=" ",
+                #     font="Font Awesome 6 Free Solid",
+                #     fontsize=13,
+                #     background='#CCCCCC',
+                #     foreground='#474747',
+                # ),
+
+                # widget.Battery(
+                #     font="JetBrainsMono Nerd Font Bold",
+                #     fontsize=13,
+                #     background='#CCCCCC',
+                #     foreground='#474747',
+                #     format='{percent:2.0%}',
+                # ),
 
                 widget.Image(filename='~/.config/qtile/Assets/2.png'),
 
@@ -413,3 +471,4 @@ wmname = "LG3D"
 
 
 # E O F
+

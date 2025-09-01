@@ -79,6 +79,10 @@ keys = [
     Key(["mod1"], "Tab", lazy.group.next_window(), desc="Cycle to next window"),
     Key(["mod1", "shift"], "Tab", lazy.group.prev_window(), desc="Cycle to previous window"),
 
+
+    Key([mod], "d", lazy.spawn("audio-device-switch.sh"), desc='Audio device switcher'),
+
+
 ]
 
 
@@ -222,7 +226,8 @@ screens = [
                 ),
 
 
-                widget.CurrentLayoutIcon(
+                widget.CurrentLayout(
+                    mode="icon",
                     custom_icon_paths=["~/.config/qtile/Assets/layout"],
                     background='#343F44',
                     scale=0.50,
@@ -282,6 +287,34 @@ screens = [
                     background='#343F44',
                 ),
 
+
+                widget.TextBox(
+                    text="",  
+                    font="Font Awesome 6 Free Solid",
+                    fontsize=13,
+                    background='#343F44',
+                    foreground='#86918A',
+                ),
+
+
+                widget.CPU(
+                    background='#343F44',
+                    format='{load_percent}%',  
+                    foreground='#86918A',
+                    font="JetBrainsMono Nerd Font Bold",
+                    fontsize=13,
+                    update_interval=5,
+                ),
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/2.png',
+                ),
+
+                widget.Spacer(
+                    length=8,
+                    background='#343F44',
+                ),
+
                 widget.TextBox(
                     text="",
                     font="Font Awesome 6 Free Solid",
@@ -307,22 +340,24 @@ screens = [
                     length=8,
                     background='#343F44',
                 ),
-
                 widget.TextBox(
-                    text=" ",
+                    text=" ",  
                     font="Font Awesome 6 Free Solid",
                     fontsize=13,
                     background='#343F44',
                     foreground='#86918A',
                 ),
 
-                widget.Battery(
+                widget.GenPollText(
+                    background='#343F44',
+                    update_interval=60,
+                    func=lambda: subprocess.check_output("df -h / | awk 'NR==2 {print $3\"/\"$2}'", shell=True).decode("utf-8").strip(),
+                    foreground='#86918A',
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=13,
-                    background='#343F44',
-                    foreground='#86918A',
-                    format='{percent:2.0%}',
                 ),
+
+
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/2.png',
@@ -332,6 +367,31 @@ screens = [
                     length=8,
                     background='#343F44',
                 ),
+
+                #widget.TextBox(
+                #    text=" ",
+                #    font="Font Awesome 6 Free Solid",
+                #    fontsize=13,
+                #    background='#343F44',
+                #    foreground='#86918A',
+                #),
+
+                #widget.Battery(
+                #    font="JetBrainsMono Nerd Font Bold",
+                #    fontsize=13,
+                #    background='#343F44',
+                #    foreground='#86918A',
+                #    format='{percent:2.0%}',
+                #),
+
+                #widget.Image(
+                #    filename='~/.config/qtile/Assets/2.png',
+                #),
+
+                #widget.Spacer(
+                #    length=8,
+                #    background='#343F44',
+                #),
 
                 widget.TextBox(
                     text=" ",

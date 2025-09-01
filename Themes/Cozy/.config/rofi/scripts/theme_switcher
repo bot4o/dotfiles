@@ -30,7 +30,7 @@ rofi_cmd() {
     rofi -dmenu \
         -p "$username" \
         -mesg "$sendoff" \
-        -theme ${dir}/cozi.rasi
+        -theme ${dir}/cozy.rasi
 }
 
 # ───────────────────────────────────────────────────────────────
@@ -59,19 +59,6 @@ run_cmd() {
             ;;
         "$theme5")
             ~/.config/rofi/theme_scripts/Carbon
-            ;;
-    esac
-}
-
-# ───────────────────────────────────────────────────────────────
-#                           Execute Cmd
-# ───────────────────────────────────────────────────────────────
-chosen="$(run_rofi)"
-run_cmd "$chosen"
-            ~/.config/rofi/theme_scripts/Natura
-            ;;
-        "$theme4")
-            ~/.config/rofi/theme_scripts/Everforest
             ;;
     esac
 }

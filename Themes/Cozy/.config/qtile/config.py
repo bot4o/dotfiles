@@ -23,7 +23,7 @@ mod = "mod4"
 terminal = "alacritty"
 
 # █▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄ █▀
-# █░█ ██▄ ░█░ █▄█ █ █░▀█y █▄▀ ▄█
+# █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ ▄█
 
 
 
@@ -76,6 +76,8 @@ keys = [
     Key([mod],"e", lazy.spawn("thunar"), desc='file manager'),
 	Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
     Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
+
+    Key([mod], "d", lazy.spawn("audio-device-switch.sh"), desc='Audio device switcher'),
 ]
 
 
@@ -219,7 +221,8 @@ screens = [
                 ),
 
 
-                widget.CurrentLayoutIcon(
+                widget.CurrentLayout(
+                    mode="icon",
                     custom_icon_paths=["~/.config/qtile/Assets/layout"],
                     background='#353446',
                     scale=0.50,
@@ -279,6 +282,34 @@ screens = [
                     background='#353446',
                 ),
 
+
+                widget.TextBox(
+                    text="",  
+                    font="Font Awesome 6 Free Solid",
+                    fontsize=13,
+                    background='#353446',
+                    foreground='#CAA9E0',
+                ),
+
+
+                widget.CPU(
+                    background='#353446',
+                    format='{load_percent}%',  
+                    foreground='#CAA9E0',
+                    font="JetBrainsMono Nerd Font Bold",
+                    fontsize=13,
+                    update_interval=5,
+                ),
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/2.png',
+                ),
+
+                widget.Spacer(
+                    length=8,
+                    background='#353446',
+                ),
+
                 widget.TextBox(
                     text="",
                     font="Font Awesome 6 Free Solid",
@@ -304,22 +335,48 @@ screens = [
                     length=8,
                     background='#353446',
                 ),
-
                 widget.TextBox(
-                    text=" ",
+                    text=" ",  
                     font="Font Awesome 6 Free Solid",
                     fontsize=13,
                     background='#353446',
                     foreground='#CAA9E0',
                 ),
 
-                widget.Battery(
+                widget.GenPollText(
+                    background='#353446',
+                    update_interval=60,
+                    func=lambda: subprocess.check_output("df -h / | awk 'NR==2 {print $3\"/\"$2}'", shell=True).decode("utf-8").strip(),
+                    foreground='#CAA9E0',
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=13,
-                    background='#353446',
-                    foreground='#CAA9E0',
-                    format='{percent:2.0%}',
                 ),
+
+
+                # widget.Image(
+                #     filename='~/.config/qtile/Assets/2.png',
+                # ),
+
+                # widget.Spacer(
+                #     length=8,
+                #     background='#353446',
+                # ),
+
+                # widget.TextBox(
+                #     text=" ",
+                #     font="Font Awesome 6 Free Solid",
+                #     fontsize=13,
+                #     background='#353446',
+                #     foreground='#CAA9E0',
+                # ),
+
+                # widget.Battery(
+                #     font="JetBrainsMono Nerd Font Bold",
+                #     fontsize=13,
+                #     background='#353446',
+                #     foreground='#CAA9E0',
+                #     format='{percent:2.0%}',
+                # ),
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/2.png',
@@ -452,3 +509,4 @@ wmname = "LG3D"
 
 
 # E O F
+

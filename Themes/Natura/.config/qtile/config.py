@@ -1,4 +1,4 @@
-    
+
 #       █████████     ███████    ███████████ █████ █████ ███████████ █████ █████       ██████████
 #      ███░░░░░███  ███░░░░░███ ░█░░░░░░███ ░░███ ░░███ ░█░░░███░░░█░░███ ░░███       ░░███░░░░░█
 #     ███     ░░░  ███     ░░███░     ███░   ░░███ ███  ░   ░███  ░  ░███  ░███        ░███  █ ░ 
@@ -9,7 +9,7 @@
 #      ░░░░░░░░░     ░░░░░░░    ░░░░░░░░░░░    ░░░░░       ░░░░░    ░░░░░ ░░░░░░░░░░░ ░░░░░░░░░░ 
 #
 #                                                                                    - DARKKAL44
-  
+
 
 
 from libqtile import bar, layout, widget, hook, qtile
@@ -30,7 +30,8 @@ terminal = "alacritty"
 
 keys = [
 
-#  D E F A U L T
+
+    #  D E F A U L T
 
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -63,7 +64,7 @@ keys = [
     Key([mod], "t", lazy.spawn("sh -c ~/.config/rofi/scripts/theme_switcher"), desc='theme_switcher'),
 
 
-# C U S T O M
+    # C U S T O M
 
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +5%"), desc='Volume Up'),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume 0 -5%"), desc='volume down'),
@@ -73,9 +74,11 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc='playerctl'),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 10%+"), desc='brightness UP'),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 10%-"), desc='brightness Down'),
-    Key([mod],"e", lazy.spawn("thunar"), desc='file manager'),
-	Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
+    Key([mod],"e", lazy.spawn("nemo"), desc='file manager'),
+    Key([mod], "h", lazy.spawn("roficlip"), desc='clipboard'),
     Key([mod], "s", lazy.spawn("flameshot gui"), desc='Screenshot'),
+
+    Key([mod], "d", lazy.spawn("audio-device-switch.sh"), desc='Audio device switcher'),
 ]
 
 
@@ -89,21 +92,21 @@ groups = [Group(f"{i+1}", label="") for i in range(8)]
 
 for i in groups:
     keys.extend(
-            [
-                Key(
-                    [mod],
-                    i.name,
-                    lazy.group[i.name].toscreen(),
-                    desc="Switch to group {}".format(i.name),
-                    ),
-                Key(
-                    [mod, "shift"],
-                    i.name,
-                    lazy.window.togroup(i.name, switch_group=True),
-                    desc="Switch to & move focused window to group {}".format(i.name),
-                    ),
-                ]
-            )
+        [
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+        ]
+    )
 
 
 
@@ -151,7 +154,7 @@ widget_defaults = dict(
     padding=3,
 )
 extension_defaults = [ widget_defaults.copy()
-        ]
+                      ]
 
 
 
@@ -175,8 +178,8 @@ screens = [
         top=bar.Bar(
             [
                 widget.Spacer(length=15,
-                    background='#0F1212',
-                ),
+                              background='#0F1212',
+                              ),
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/launch_Icon.png',
@@ -219,7 +222,8 @@ screens = [
                 ),
 
 
-                widget.CurrentLayoutIcon(
+                widget.CurrentLayout(
+                    mode="icon",
                     custom_icon_paths=["~/.config/qtile/Assets/layout"],
                     background='#202222',
                     scale=0.50,
@@ -280,7 +284,34 @@ screens = [
                 ),
 
                 widget.TextBox(
-                    text="",
+                    text="",  
+                    font="Font Awesome 6 Free Solid",
+                    fontsize=13,
+                    background='#202222',
+                    foreground='#607767',
+                ),
+
+                widget.CPU(
+                    background='#202222',
+                    format='{load_percent}%',  
+                    foreground='#607767',
+                    font="JetBrainsMono Nerd Font Bold",
+                    fontsize=13,
+                    update_interval=5,
+                ),
+
+                widget.Image(
+                    filename='~/.config/qtile/Assets/2.png',
+                ),
+
+                widget.Spacer(
+                    length=8,
+                    background='#202222',
+                ),
+
+
+                widget.TextBox(
+                    text=" ",
                     font="Font Awesome 6 Free Solid",
                     fontsize=13,
                     background='#202222',
@@ -304,22 +335,52 @@ screens = [
                     length=8,
                     background='#202222',
                 ),
-
                 widget.TextBox(
-                    text=" ",
+                    text=" ",  
                     font="Font Awesome 6 Free Solid",
                     fontsize=13,
                     background='#202222',
                     foreground='#607767',
                 ),
 
-                widget.Battery(
+                widget.GenPollText(
+                    background='#202222',
+                    update_interval=60,
+                    func=lambda: subprocess.check_output("df -h / | awk 'NR==2 {print $3\"/\"$2}'", shell=True).decode("utf-8").strip(),
+                    foreground='#607767',
                     font="JetBrainsMono Nerd Font Bold",
                     fontsize=13,
-                    background='#202222',
-                    foreground='#607767',
-                    format='{percent:2.0%}',
                 ),
+
+
+
+               # widget.Image(
+               #     filename='~/.config/qtile/Assets/2.png',
+               # ),
+
+               # widget.Spacer(
+               #     length=8,
+               #     background='#202222',
+               # ),
+
+               # widget.TextBox(
+               #     text=" ",
+               #     font="Font Awesome 6 Free Solid",
+               #     fontsize=13,
+               #     background='#202222',
+               #     foreground='#607767',
+               # ),
+
+               # widget.Battery(
+               #     font="JetBrainsMono Nerd Font Bold",
+               #     fontsize=13,
+               #     background='#202222',
+               #     foreground='#607767',
+               #     charge_char='⚡',       
+               #     discharge_char='',    
+               #     format='{percent:2.0%}{char}',
+
+               # ),
 
                 widget.Image(
                     filename='~/.config/qtile/Assets/2.png',
@@ -338,9 +399,9 @@ screens = [
                     foreground='#607767',
                 ),
 
-				widget.Volume(
-					font="JetBrainsMono Nerd Font Bold",
-					fontsize=13,
+                widget.Volume(
+                    font="JetBrainsMono Nerd Font Bold",
+                    fontsize=13,
                     background='#202222',
                     foreground='#607767',
 					mute_command="pamixer --toggle-mute",
@@ -350,7 +411,9 @@ screens = [
 					update_interval=0.2,
 					unmute_format="{volume}%",
 					mute_format="M",
-				),
+
+                ),
+
                 widget.Image(
                     filename='~/.config/qtile/Assets/5.png',
                     background='#202222',
@@ -402,9 +465,9 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
-	border_focus='#1F1D2E',
-	border_normal='#1F1D2E',
-	border_width=0,
+    border_focus='#1F1D2E',
+    border_normal='#1F1D2E',
+    border_width=0,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -451,3 +514,4 @@ wmname = "LG3D"
 
 
 # E O F
+
