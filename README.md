@@ -25,7 +25,6 @@ sudo systemctl enable --now NetworkManager
 # or whatever is used
 ```
 
----
 
 # 2. Clone dotfiles
 
@@ -34,8 +33,6 @@ git clone https://github.com/bot4o/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
----
-
 # 3. Install packages
 
 ## 3.1 Core packages
@@ -43,8 +40,6 @@ cd ~/.dotfiles
 ```bash
 sudo pacman -S --needed - < pkglist.txt
 ```
-
----
 
 ## 3.2 AUR packages
 
@@ -59,8 +54,6 @@ Then:
 ```bash
 paru -S --needed - < aurlist.txt
 ```
-
----
 
 # 4. Apply dotfiles (symlinks)
 
@@ -84,8 +77,6 @@ stow nvim
 stow qtile
 ```
 
----
-
 # 5. Shell setup
 
 Set Zsh as default shell:
@@ -96,8 +87,6 @@ chsh -s /bin/zsh
 
 Then restart session.
 
----
-
 # 6. Qtile setup
 
 Enable X session:
@@ -106,8 +95,6 @@ Enable X session:
 echo "exec qtile start" > ~/.xinitrc
 startx
 ```
-
----
 
 # 7. Fonts
 
@@ -123,8 +110,6 @@ Refresh font cache:
 fc-cache -fv
 ```
 
----
-
 # 8. Post-install checklist
 
 * [ ] Network working
@@ -133,8 +118,6 @@ fc-cache -fv
 * [ ] Fonts rendering correctly
 * [ ] AUR helper installed
 * [ ] Dotfiles applied via stow
-
----
 
 # 10. Troubleshoot
 
@@ -155,5 +138,3 @@ sudo chown -R $USER:$USER ~/.dotfiles
 ```bash
 sudo pacman -S --needed - < pkglist.txt
 ```
-
----
