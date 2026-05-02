@@ -1,0 +1,7 @@
+[user]
+	email = boevaleksandar@proton.me
+	name = bot4o
+[credential]
+	helper = store
+[core]
+	editor = vim

@@ -123,7 +123,7 @@ add-zsh-hook -Uz precmd rehash_precmd
 alias zshconfig="geany ~/.zshrc"
 alias ohmyzsh="thunar ~/.oh-my-zsh"
 alias vim='nvim'
-export EDITOR=nvim
+#export EDITOR=nvim
 
 #custom stuff
 cat ~/.cache/wal/sequences
@@ -137,13 +137,12 @@ fi
 
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
 
 export TERM="xterm-256color"
 export PATH="/home/bobbi/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/home/bobbi/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 
-# Created by `pipx` on 2025-05-18 15:50:33
 export PATH="$PATH:/home/bobbi/.local/bin"

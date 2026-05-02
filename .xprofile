@@ -1,0 +1,4 @@
+#!/bin/sh
+xrandr --output DisplayPort-2 --mode 1920x1080 --rate 165
+xrandr --output DisplayPort-2 --primary
+export XCURSOR_SIZE=24 && xrandr --output HDMI-A-0 --above DisplayPort-2
