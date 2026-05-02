@@ -9,16 +9,6 @@ This repository contains my Arch Linux system configuration, including:
 * Networking / lab tools
 
 The setup is designed for **Arch Linux + X11 + Qtile**.
-# Design philosophy
-
-This setup follows:
-
-* minimal base system
-* explicit package control
-* separation of core vs optional tools
-* reproducibility over convenience
-
----
 
 # 1. Requirements (fresh system)
 
