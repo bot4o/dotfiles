@@ -110,16 +110,7 @@ Refresh font cache:
 fc-cache -fv
 ```
 
-# 8. Post-install checklist
-
-* [ ] Network working
-* [ ] Zsh default shell
-* [ ] Qtile starts via `startx`
-* [ ] Fonts rendering correctly
-* [ ] AUR helper installed
-* [ ] Dotfiles applied via stow
-
-# 10. Troubleshoot
+#  Troubleshoot
 
 ### Rebuild broken zsh completions
 ```bash
